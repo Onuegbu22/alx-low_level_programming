@@ -1,29 +1,33 @@
 #include "main.h"
+#include <stdio.h>
 /**
- * cap_string - capitalizes all words in a string
- * @s: string
- * Return: address of s
+ * cap_string - function that capitalizes all words of a string
+ * @n: integer
+ * Return: n
  */
-char *cap_string(char *s)
+char *cap_string(char *n)
 {
-	int i = 0, j;
-	char a[] = " \t\n,;.!?\"(){}";
-
-	while (*(s + i))
+	int a = 0; while (n[a])
 	{
-		if (*(s + i) >= 'a' && *(s + i) <= 'z')
-		{
-			if (i == 0)
-				*(s + i) -= 'a' - 'A';
-			else
-			{
-				for (j = 0; j <= 12; j++)
-				{
-					if (a[j] == *(s + i - 1))
-						*(s + i) -= 'a' - 'A';
-				}
-			}
-		}
-		i++;
+		while (!(n[a] >= 'a' && n[a] <= 'z'))
+
+			a++;
+
+		if (n[a - 1] == ' ' ||
+			n[a - 1] == '\t' ||
+			n[a - 1] == '\n' ||
+			n[a - 1] == ',' ||
+			n[a - 1] == ';' ||
+			n[a - 1] == '.' ||
+			n[a - 1] == '!' ||
+			n[a - 1] == '?' ||
+			n[a - 1] == '"' ||
+			n[a - 1] == '(' ||
+			n[a - 1] == ')' ||
+			n[a - 1] == '{' ||
+			n[a - 1] == '}' || a == 0)
+			n[a] -= 32;
+		a++;
 	}
+	return (n);
 }
