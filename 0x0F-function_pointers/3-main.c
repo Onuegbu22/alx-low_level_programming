@@ -1,19 +1,37 @@
-#ifndef CALC_H
-#define CALC_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "3-calc.h"
 /**
- * struct op - struct op
- * @op: the operator
- * @f: the function associated
+ *main - a program that performs simple arithmetic operations by calling
+ *helper functions
+ *@argc: the number of command-line arguments
+ *@argv: an array of strings containing one cmd-line argument per string
+ *Return: returns 0 (success)
  */
-typedef struct op
+int main(int argc, char *argv[])
 {
-	char *op;
-	int (*f)(int a, int b);
-} op_t;
-int op_add(int a, int b);
-int op_sub(int a, int b);
-int op_mul(int a, int b);
-int op_div(int a, int b);
-int op_mod(int a, int b);
-int (*get_op_func(char *s))(int, int);
-#endif /*3-CALC_H*/
+	int num1, num2, result;int (*ptr)(int, int); 
+		if (argc != 4)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	if (strlen(argv[2]) == 1 && (argv[2][0] == '+' || argv[2][0] == '-'
+		|| argv[2][0] == '*' || argv[2][0] == '/' || argv[2][0] == '%'))
+	{
+		if (atoi(argv[3]) == 0 && (argv[2][0] == '/' || argv[2][0] == '%'))
+		{
+			printf("Error\n");
+			exit(100);
+		}
+		num1 = atoi(argv[1]);
+		num2 = atoi(argv[3]);
+		ptr = get_op_func(argv[2]);
+		result = ptr(num1, num2);
+		printf("%d\n", result);
+		return (0);
+	}
+	printf("Error\n");
+	exit(99);
+}
